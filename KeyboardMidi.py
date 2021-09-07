@@ -30,11 +30,14 @@ try:
 except IndexError:
     raise(IOError("Input port not found."))
 
-while True:
-    # [状態(押した/離した), 押したキーの場所, 押した強さ]
-    message = input_port.get_message()
-    if message:
-        if message[0]==144:
-            key_num = return_scale_num(scale_list,message[1])
-            key_press = scale_name[key_num]
-            pyautogui.press(key_press)
+try:
+    while True:
+        # [状態(押した/離した), 押したキーの場所, 押した強さ]
+        message = input_port.get_message()
+        if message:
+            if message[0]==144:
+                key_num = return_scale_num(scale_list,message[1])
+                key_press = scale_name[key_num]
+                pyautogui.press(key_press)
+except KeyboardInterrupt:
+    print('\nmidi入力終了')
