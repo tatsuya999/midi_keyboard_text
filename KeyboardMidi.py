@@ -1,5 +1,23 @@
 import rtmidi2
 import pyautogui
+import numpy as np
+#音階の名前リスト
+scale_name = ['C','C#','D','Eb','E','F','F#','G','G#','A','Bb','B']
+#音階の位置
+scale_list_mold = np.zeros((11,12))
+for i in range(12):
+    for n in range(11):
+        scale_list_mold[n][i]=i+12*n
+scale_list = scale_list_mold.T
+
+#音階の位置を探索する関数
+def return_scale_num(list_s,search_num):
+    return_num = 0
+    for i in range(12):
+        for n in range(11):
+            if list_s[i][n]==search_num:
+                return_num = i
+    return return_num
 
 midi_in = rtmidi2.MidiIn()
 print(midi_in.ports)
@@ -17,12 +35,6 @@ while True:
     message = input_port.get_message()
     if message:
         if message[0]==144:
-            pyautogui.press('a')
-#音階の辞書
-scale = ['C','C#','D','Eb','E','F','F#','G','G#','A','Bb','B']
-scale_dic = {}
-for i in range(12):
-    for n in range(11):
-        scale_dic.setdefault(scale[i],[]).append(i+12*n)
-    
-def get_key()
+            key_num = return_scale_num(scale_list,message[1])
+            key_press = scale_name[key_num]
+            pyautogui.press(key_press)
