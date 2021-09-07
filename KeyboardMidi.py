@@ -1,6 +1,9 @@
 import rtmidi2
 import pyautogui
 import numpy as np
+
+#キーボードの操作リスト
+key_action = ['space','enter','return','backspace','esc','command','shift']
 #音階の名前リスト
 scale_name = ['C','C#','D','Eb','E','F','F#','G','G#','A','Bb','B']
 #音階の位置
