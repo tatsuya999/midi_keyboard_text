@@ -3,11 +3,11 @@ import pyautogui
 import numpy as np
 
 #特殊キーボードの操作リスト
-key_action = ['space','enter','return','backspace','esc','command','shift']
+key_action = ['space','enter','return','backspace','esc','command','shift','ctrl']
 #キーボードの文字リスト
 key_text = [['q','a','z'],['w','s','x'],['e','d','c'],['r','f','v','t','g','b'],['y','h','n','u','j','m'],['i','k',','],['o','l','.'],['p',';','/']]
 #音階の名前リスト
-scale_name = ['C','C#','D','Eb','E','F','F#','G','G#','A','Bb','B']
+scale_name = ['c','c#','d','eb','d','f','f#','g','g#','a','a#','b']
 #音階の位置リスト
 scale_list_mold = np.zeros((11,12))
 for i in range(12):
@@ -44,6 +44,10 @@ try:
             if message[0]==144:
                 key_num = return_scale_num(scale_list,message[1])
                 key_press = scale_name[key_num]
-                pyautogui.press(key_press)
+                pyautogui.keyDown(key_press)
+            elif message[0]==128:
+                key_num = return_scale_num(scale_list,message[1])
+                key_press = scale_name[key_num]
+                pyautogui.keyUp(key_press)
 except KeyboardInterrupt:
     print('\nmidi入力終了')
