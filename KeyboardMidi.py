@@ -28,6 +28,7 @@ midi_in = rtmidi2.MidiIn()
 print(midi_in.ports)
 
 device_name = "microKEY-25"
+#device_name = "KOMPLETE KONTROL A49"
 # midiがデバイスで検知されているかどうかのエラー処理
 try:
     index = midi_in.ports_matching(device_name+"*")[0]

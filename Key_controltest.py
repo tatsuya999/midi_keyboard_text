@@ -9,7 +9,8 @@ scale_name = ['C','C#','D','Eb','E','F','F#','G','G#','A','Bb','B','C2','C2#','D
 midi_in = rtmidi2.MidiIn()
 print(midi_in.ports)
 
-device_name = "microKEY-25"
+#device_name = "microKEY-25"
+device_name = "KOMPLETE KONTROL A49"
 try:
     index = midi_in.ports_matching(device_name+"*")[0]
     input_port = midi_in.open_port(index)
