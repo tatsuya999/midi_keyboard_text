@@ -2,6 +2,7 @@ import numpy as np
 import pyautogui
 import rtmidi2
 import Key_module as m_key
+
 #キーボードの文字リスト
 key_text = [['q','a','z'],['w','s','x'],['e','d','c'],['r','f','v','t','g','b'],['y','h','n','u','j','m'],['i','k'],['o','l'],['p']]
 scale_name = ['C','C#','D','Eb','E','F','F#','G','G#','A','Bb','B','C2','C2#','D2','E2b','E2','F2','F2#','G2','G2#','A2','B2b','B2']
@@ -17,10 +18,10 @@ except IndexError:
     raise(IOError("Input port not found."))
 
 #音階の位置リスト
-scale_list_mold = np.zeros((6,24))
-for i in range(24):
-    for n in range(6):
-        scale_list_mold[n][i]=i+24*n
+scale_list_mold = np.zeros((11,12))
+for i in range(12):
+    for n in range(11):
+        scale_list_mold[n][i]=i+12*n
 
 scale_list = scale_list_mold.T
 
