@@ -1,5 +1,6 @@
 #音階の位置を探索する関数(リスト,音階位置を引数)ドレミファを返す
 import random
+
 def return_scale_num(list_s,search_num):
     return_num = 0
     for i in range(12):
@@ -7,7 +8,7 @@ def return_scale_num(list_s,search_num):
             if list_s[i][n]==search_num:
                 return_num = i
     return return_num
-
+#2オクターブ用
 def return_scale_num2(list_s,search_num):
     return_num = 0
     for i in range(24):
@@ -17,22 +18,25 @@ def return_scale_num2(list_s,search_num):
     return return_num
 
 #スケールから指配置を指定する関数
-def key_schange(scale_name,key_text):
-    if scale_name == 'C':
+def key_schange(key_num):
+    key_text = [['q','a','z'],['w','s','x'],['e','d','c'],['r','f','v','t','g','b'],['y','h','n','u','j','m'],['i','k'],['o','l'],['p']]
+    scale_name = ['C','C#','D','Eb','E','F','F#','G','G#','A','Bb','B','C2','C2#','D2','E2b','E2','F2','F2#','G2','G2#','A2','B2b','B2']
+    scale_press = scale_name[key_num]
+    if scale_press == 'C':
         return random.choice(key_text[0])
-    if scale_name == 'D':
+    if scale_press == 'D':
         return random.choice(key_text[1])
-    if scale_name == 'E':
+    if scale_press == 'E':
         return random.choice(key_text[2])
-    if scale_name == 'F':
+    if scale_press == 'F':
         return random.choice(key_text[3])
-    if scale_name == 'F2':
+    if scale_press == 'F2':
         return random.choice(key_text[4])
-    if scale_name == 'G2':
+    if scale_press == 'G2':
         return random.choice(key_text[5])
-    if scale_name == 'A2':
+    if scale_press == 'A2':
         return random.choice(key_text[6])
-    if scale_name == 'B2':
+    if scale_press == 'B2':
         return random.choice(key_text[7])
     else:
         print('ポジションが違う')

@@ -3,9 +3,6 @@ import pyautogui
 import rtmidi2
 import Key_module as m_key
 
-#キーボードの文字リスト
-key_text = [['q','a','z'],['w','s','x'],['e','d','c'],['r','f','v','t','g','b'],['y','h','n','u','j','m'],['i','k'],['o','l'],['p']]
-scale_name = ['C','C#','D','Eb','E','F','F#','G','G#','A','Bb','B','C2','C2#','D2','E2b','E2','F2','F2#','G2','G2#','A2','B2b','B2']
 midi_in = rtmidi2.MidiIn()
 print(midi_in.ports)
 
@@ -33,11 +30,11 @@ try:
         if message:
             if message[0]==144:
                 key_num = m_key.return_scale_num2(scale_list,message[1])
-                key_press = m_key.key_schange(scale_name[key_num],key_text)
+                key_press = m_key.key_schange(key_num)
                 pyautogui.keyDown(key_press)
             elif message[0]==128:
                 key_num = m_key.return_scale_num2(scale_list,message[1])
-                key_press = m_key.key_schange(scale_name[key_num],key_text)
+                key_press = m_key.key_schange(key_num)
                 pyautogui.keyUp(key_press)
 except KeyboardInterrupt:
     print('\nmidi入力終了')
