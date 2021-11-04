@@ -2,6 +2,7 @@ import numpy as np
 import pyautogui
 import rtmidi2
 import Key_module as m_key
+
 #キーボードの文字リスト
 key_text = [['q','a','z'],['w','s','x'],['e','d','c'],['r','f','v','t','g','b'],['y','h','n','u','j','m'],['i','k'],['o','l'],['p']]
 scale_name = ['C','C#','D','Eb','E','F','F#','G','G#','A','Bb','B','C2','C2#','D2','E2b','E2','F2','F2#','G2','G2#','A2','B2b','B2']
@@ -26,16 +27,16 @@ scale_list = scale_list_mold.T
 
 try:
     while True:
-        message = input_port.get_message()
+        message = midi_in.get_message()
         #message[状態(押した144/離した128), 押したキーの場所, 押した強さ]
         #message[1]== 0->C,1->C#,.....11->B,13->C
         if message:
             if message[0]==144:
-                key_num = m_key.return_scale_num(scale_list,message[1])
+                key_num = m_key.return_scale_num2(scale_list,message[1])
                 key_press = m_key.key_schange(scale_name[key_num],key_text)
                 pyautogui.keyDown(key_press)
             elif message[0]==128:
-                key_num = m_key.return_scale_num(scale_list,message[1])
+                key_num = m_key.return_scale_num2(scale_list,message[1])
                 key_press = m_key.key_schange(scale_name[key_num],key_text)
                 pyautogui.keyUp(key_press)
 except KeyboardInterrupt:

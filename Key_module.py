@@ -1,8 +1,17 @@
 #音階の位置を探索する関数(リスト,音階位置を引数)ドレミファを返す
+import random
 def return_scale_num(list_s,search_num):
     return_num = 0
     for i in range(12):
         for n in range(11):
+            if list_s[i][n]==search_num:
+                return_num = i
+    return return_num
+
+def return_scale_num2(list_s,search_num):
+    return_num = 0
+    for i in range(24):
+        for n in range(6):
             if list_s[i][n]==search_num:
                 return_num = i
     return return_num
