@@ -22,6 +22,7 @@ for i in range(24):
 
 scale_list = scale_list_mold.T
 
+pattern = []
 try:
     while True:
         message = midi_in.get_message()
@@ -31,51 +32,12 @@ try:
             if message[0]==144:
                 key_num = m_key.return_scale_num2(scale_list,message[1])
                 key_press = m_key.key_schange(key_num)
-                pyautogui.keyDown(key_press)
+                pattern += m_key.Cartesian_list(pattern,key_press)
+                #pyautogui.keyDown(key_press)
+                print(pattern)
             elif message[0]==128:
                 key_num = m_key.return_scale_num2(scale_list,message[1])
                 key_press = m_key.key_schange(key_num)
-                pyautogui.keyUp(key_press)
+                #pyautogui.keyUp(key_press)
 except KeyboardInterrupt:
     print('\nmidi入力終了')
-"""
-message_list = []
-message_con_list = []
-chord_list = [0]
-list_number = 0
-try:
-    while True:
-        message = input_port.get_message()
-        if message:
-            print(message)
-except KeyboardInterrupt:
-    print('\nmidi入力終了')
-
-
-#音階の辞書
-
-scale_dic={}
-for i in range(24):
-    for n in range(6):
-        scale_dic.setdefault(scale_name[i],[]).append(i+24*n)
-print(scale_dic)
-#音階の位置リスト
-scale_list_mold = np.zeros((6,24))
-for i in range(24):
-    for n in range(6):
-        scale_list_mold[n][i]=i+24*n
-
-scale_list = scale_list_mold.T
-
-
-#音階の位置を探索する関数
-def return_scale_num(list_s,search_num):
-    return_num = 0
-    for i in range(24):
-        for n in range(6):
-            if list_s[i][n]==search_num:
-                return_num = i
-    return return_num
-print(scale_list)
-print(return_scale_num(scale_list,32))
-"""
