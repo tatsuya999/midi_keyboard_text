@@ -23,20 +23,22 @@ def key_schange(key_num):
     scale_name = ['C','C#','D','Eb','E','F','F#','G','G#','A','Bb','B','C2','C2#','D2','E2b','E2','F2','F2#','G2','G2#','A2','B2b','B2']
     scale_press = scale_name[key_num]
     if scale_press == 'C':
-        return random.choice(key_text[0])
+        return key_text[0]
     if scale_press == 'D':
-        return random.choice(key_text[1])
+        return key_text[1]
     if scale_press == 'E':
-        return random.choice(key_text[2])
+        return key_text[2]
     if scale_press == 'F':
-        return random.choice(key_text[3])
+        return key_text[3]
     if scale_press == 'F2':
-        return random.choice(key_text[4])
+        return key_text[4]
     if scale_press == 'G2':
-        return random.choice(key_text[5])
+        return key_text[5]
     if scale_press == 'A2':
-        return random.choice(key_text[6])
+        return key_text[6]
     if scale_press == 'B2':
-        return random.choice(key_text[7])
+        return key_text[7]
     else:
+        return null
         print('ポジションが違う')
+
