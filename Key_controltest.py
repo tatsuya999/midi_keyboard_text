@@ -32,9 +32,10 @@ try:
             if message[0]==144:
                 key_num = m_key.return_scale_num2(scale_list,message[1])
                 key_press = m_key.key_schange(key_num)
-                pattern += m_key.Cartesian_list(pattern,key_press)
+                pattern = m_key.Cartesian_list(pattern,key_press)
                 #pyautogui.keyDown(key_press)
-                print(pattern)
+                list_pattern = list(pattern)
+                print(list_pattern)
             elif message[0]==128:
                 key_num = m_key.return_scale_num2(scale_list,message[1])
                 key_press = m_key.key_schange(key_num)

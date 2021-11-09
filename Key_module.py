@@ -42,6 +42,7 @@ def key_schange(key_num):
         return key_text[8]
         print('ポジションが違う')
 
+#リストの直積（全通り組み合わせ）
 def Cartesian_list(product,add):
     p = []
     if product == []:
@@ -50,7 +51,8 @@ def Cartesian_list(product,add):
     else:
         for i in product:
             for n in add:
-                p.append((i,n))
+                p = itertools.product(product,add)
     return p
+
 
 #def suggestion(all_list):
