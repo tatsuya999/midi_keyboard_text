@@ -49,10 +49,6 @@ def Cartesian_list(product,add):
         for i in add:
             p.append(i)
     else:
-        for i in product:
-            for n in add:
-                p = itertools.product(product,add)
+        p = itertools.product(product,add)
     return p
-
-
 #def suggestion(all_list):

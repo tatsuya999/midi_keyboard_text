@@ -21,10 +21,10 @@ for i in range(24):
         scale_list_mold[n][i]=i+24*n
 
 scale_list = scale_list_mold.T
-
 pattern = []
+
 try:
-    while True:
+    while True:        
         message = midi_in.get_message()
         #message[状態(押した144/離した128), 押したキーの場所, 押した強さ]
         #message[1]== 0->C,1->C#,.....11->B,13->C
