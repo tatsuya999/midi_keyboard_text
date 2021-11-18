@@ -6,8 +6,8 @@ import Key_module as m_key
 midi_in = rtmidi2.MidiIn()
 print(midi_in.ports)
 
-#device_name = "microKEY-25"
-device_name = "KOMPLETE KONTROL A49"
+device_name = "microKEY-25"
+#device_name = "KOMPLETE KONTROL A49"
 try:
     index = midi_in.ports_matching(device_name+"*")[0]
     input_port = midi_in.open_port(index)
@@ -25,6 +25,10 @@ scale_list = scale_list_mold.T
 pattern = []
 #単語予測結果リスト
 pre_word = []
+#文リスト
+sen_list = []
+#キーボード押した回数
+key_count = 0
 try:
     while True:        
         message = midi_in.get_message()
@@ -32,11 +36,13 @@ try:
         #message[1]== 0->C,1->C#,.....11->B,13->C
         if message:
             if message[0]==144:
+                key_count+=1
                 key_num = m_key.Return_Scale_Num2(scale_list,message[1])
                 key_press = m_key.Key_Schange(key_num)
                 pattern += m_key.Cartesian_list(pattern,key_press)
                 for i in pattern:
-                    pre_word += m_key.Text_Enchant(i)
+                    if len(i) == key_count:
+                        pre_word += m_key.Text_Enchant(i)
                 #pyautogui.keyDown(key_press)
                 print(pre_word)
                 pre_word = []

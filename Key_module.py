@@ -53,11 +53,13 @@ def Cartesian_list(product,add):
                 link = i + n
                 p.append(link)
     return p
-#def suggestion(all_list):
 
+#単語特定
 def Text_Enchant(tar):
     correct_word = []
     dic = enchant.Dict("en_US")
     if dic.check(tar):
         correct_word.append(tar)
     return correct_word
+
+#def suggestion(all_list):
