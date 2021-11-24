@@ -39,12 +39,6 @@ try:
         #message[1]== 0->C,1->C#,.....11->B,13->C
         if message:   
             if message[0]==144:
-                key_message.append(message[1])
-                if len(key_message) >= 2:
-                    print(pre_word)
-                    sen_list.append(pre_word[0])
-                display_list = []
-            if message[0]==128:
                 key_count+=1
                 key_num = m_key.Return_Scale_Num2(scale_list,message[1])
                 key_press = m_key.Key_Schange(key_num)
@@ -56,8 +50,15 @@ try:
                         if len(i) == key_count:
                             pre_word += m_key.Text_Enchant(i)
                             display_list += m_key.Text_Enchant(i)
-                    #pyautogui.keyDown(key_press)
-                print(pre_word)
-                #pyautogui.keyUp(key_press)
+                        print(pre_word)
+                    key_message.append(message[1])
+                    if len(key_message) >= 2:
+                        print(pre_word)
+                        sen_list.append(pre_word[0])
+                display_list = []
+                #pyautogui.keyDown(key_press)
+            if message[0]==128:
+                key_message.pop()
+                    #pyautogui.keyUp(key_press)
 except KeyboardInterrupt:
     print('\nmidi入力終了')
