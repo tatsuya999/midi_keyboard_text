@@ -23,10 +23,13 @@ for i in range(24):
 scale_list = scale_list_mold.T
 #全パターン用リスト
 pattern = []
-#単語予測結果リスト
+#単語予測結果リスト,表示リスト
 pre_word = []
+display_list = []
 #文リスト
 sen_list = []
+#キーボード打鍵リスト
+key_message = []
 #キーボード押した回数
 key_count = 0
 try:
@@ -34,21 +37,27 @@ try:
         message = midi_in.get_message()
         #message[状態(押した144/離した128), 押したキーの場所, 押した強さ]
         #message[1]== 0->C,1->C#,.....11->B,13->C
-        if message:
+        if message:   
             if message[0]==144:
+                key_message.append(message[1])
+                if len(key_message) >= 2:
+                    print(pre_word)
+                    sen_list.append(pre_word[0])
+                display_list = []
+            if message[0]==128:
                 key_count+=1
                 key_num = m_key.Return_Scale_Num2(scale_list,message[1])
                 key_press = m_key.Key_Schange(key_num)
-                pattern += m_key.Cartesian_list(pattern,key_press)
-                for i in pattern:
-                    if len(i) == key_count:
-                        pre_word += m_key.Text_Enchant(i)
-                #pyautogui.keyDown(key_press)
+                if key_num == 22:
+                    pattern.clear()
+                else:
+                    pattern += m_key.Cartesian_list(pattern,key_press)
+                    for i in pattern:
+                        if len(i) == key_count:
+                            pre_word += m_key.Text_Enchant(i)
+                            display_list += m_key.Text_Enchant(i)
+                    #pyautogui.keyDown(key_press)
                 print(pre_word)
-                pre_word = []
-            elif message[0]==128:
-                key_num = m_key.Return_Scale_Num2(scale_list,message[1])
-                key_press = m_key.Key_Schange(key_num)
                 #pyautogui.keyUp(key_press)
 except KeyboardInterrupt:
     print('\nmidi入力終了')
