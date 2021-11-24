@@ -44,6 +44,7 @@ try:
                 key_press = m_key.Key_Schange(key_num)
                 if key_num == 22:
                     pattern.clear()
+                    key_count = 0
                 else:
                     pattern += m_key.Cartesian_list(pattern,key_press)
                     for i in pattern:
@@ -58,7 +59,8 @@ try:
                 display_list = []
                 #pyautogui.keyDown(key_press)
             if message[0]==128:
-                key_message.pop()
+                if key_message:
+                    key_message.pop()
                     #pyautogui.keyUp(key_press)
 except KeyboardInterrupt:
     print('\nmidi入力終了')
