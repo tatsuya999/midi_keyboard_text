@@ -50,11 +50,11 @@ try:
                         if len(i) == key_count:
                             pre_word += m_key.Text_Enchant(i)
                             display_list += m_key.Text_Enchant(i)
-                        print(pre_word)
                     key_message.append(message[1])
                     if len(key_message) >= 2:
                         print(pre_word)
                         sen_list.append(pre_word[0])
+                print(display_list)
                 display_list = []
                 #pyautogui.keyDown(key_press)
             if message[0]==128:
