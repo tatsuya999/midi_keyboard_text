@@ -44,7 +44,9 @@ try:
                 key_press = m_key.Key_Schange(key_num)
                 if key_num == 22:
                     pattern.clear()
+                    pre_word.clear()
                     key_count = 0
+                    print("clear")
                 else:
                     pattern += m_key.Cartesian_list(pattern,key_press)
                     for i in pattern:
@@ -52,10 +54,13 @@ try:
                             pre_word += m_key.Text_Enchant(i)
                             display_list += m_key.Text_Enchant(i)
                     key_message.append(message[1])
-                    if len(key_message) >= 2:
-                        print(pre_word)
-                        sen_list.append(pre_word[0])
-                print(display_list)
+                    print(display_list)
+                if len(key_message) >= 2:
+                    print(key_count)
+                    for i in pre_word:
+                        if len(i) == key_count-len(key_message):
+                            sen_list.append(i)
+                    print(sen_list)
                 display_list = []
                 #pyautogui.keyDown(key_press)
             if message[0]==128:
