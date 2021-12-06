@@ -3,6 +3,11 @@ import pyautogui
 import rtmidi2
 import Key_module as m_key
 
+def Clear():
+    pattern.clear()
+    pre_word.clear()
+    key_count = 0
+    
 midi_in = rtmidi2.MidiIn()
 print(midi_in.ports)
 
@@ -30,8 +35,11 @@ display_list = []
 sen_list = []
 #キーボード打鍵リスト
 key_message = []
+#選択用リスト
+select_list = []
 #キーボード押した回数
 key_count = 0
+select = 0
 try:
     while True:        
         message = midi_in.get_message()
@@ -39,29 +47,34 @@ try:
         #message[1]== 0->C,1->C#,.....11->B,13->C
         if message:   
             if message[0]==144:
-                key_count+=1
-                key_num = m_key.Return_Scale_Num2(scale_list,message[1])
-                key_press = m_key.Key_Schange(key_num)
-                if key_num == 22:
-                    pattern.clear()
-                    pre_word.clear()
-                    key_count = 0
-                    print("clear")
-                else:
-                    pattern += m_key.Cartesian_list(pattern,key_press)
-                    for i in pattern:
-                        if len(i) == key_count:
-                            pre_word += m_key.Text_Enchant(i)
-                            display_list += m_key.Text_Enchant(i)
-                    key_message.append(message[1])
-                    print(display_list)
+                if len(key_message) < 2:
+                    key_count+=1
+                    key_num = m_key.Return_Scale_Num2(scale_list,message[1])
+                    key_press = m_key.Key_Schange(key_num)
+                    if key_num == 22:
+                        pattern.clear()
+                        pre_word.clear()
+                        key_count = 0
+                        print("clear")
+                    else:
+                        pattern += m_key.Cartesian_list(pattern,key_press)
+                        for i in pattern:
+                            if len(i) == key_count:
+                                pre_word += m_key.Text_Enchant(i)
+                                display_list += m_key.Text_Enchant(i)
+                        key_message.append(message[1])
+                        print(display_list)
+                        display_list = []
                 if len(key_message) >= 2:
-                    print(key_count)
                     for i in pre_word:
                         if len(i) == key_count-len(key_message):
-                            sen_list.append(i)
+                            select_list.append(i)
+                    select += m_key.Roll_CandG(sum(key_message))
+                    print('\033[31m'+select_list[select]+'\033[0m')
+                    if sum(key_message) == 9+14:
+                        sen_list.append(select_list[select])       
                     print(sen_list)
-                display_list = []
+                    key_count = 0
                 #pyautogui.keyDown(key_press)
             if message[0]==128:
                 if key_message:

@@ -62,4 +62,22 @@ def Text_Enchant(tar):
         correct_word.append(tar)
     return correct_word
 
-#def suggestion(all_list):
+def Text_suggest(tar):
+    dic = enchant.Dict("en_US")
+    suggest_word = dic.suggest(tar)
+    return suggest_word
+
+
+def Chord_select(sum_key_mes,select):
+    if sum_key_mes == 9+14:
+        return select
+    
+
+#C(c,e)+G(g,b)で選択用
+def Roll_CandG(sum_key_mes):
+    i = 0
+    if sum_key_mes == 16+12:
+        i = 1
+    if sum_key_mes == 11+7:
+        i = -1   
+    return i
