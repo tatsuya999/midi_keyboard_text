@@ -39,7 +39,7 @@ key_message = []
 select_list = []
 #キーボード押した回数
 key_count = 0
-select = 0
+select = -1
 try:
     while True:        
         message = midi_in.get_message()
@@ -66,6 +66,7 @@ try:
                         print(display_list)
                         display_list = []
                 if len(key_message) >= 2:
+                    pattern.clear()
                     for i in pre_word:
                         if len(i) == key_count-len(key_message):
                             select_list.append(i)
@@ -73,7 +74,10 @@ try:
                     print('\033[31m'+select_list[select]+'\033[0m')
                     if sum(key_message) == 9+14:
                         sen_list.append(select_list[select])       
-                    print(sen_list)
+                        print(sen_list)
+                        pre_word.clear()
+                        select_list.clear()
+                        select = -1
                     key_count = 0
                 #pyautogui.keyDown(key_press)
             if message[0]==128:
